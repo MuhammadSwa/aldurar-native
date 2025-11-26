@@ -12,8 +12,8 @@ export default function TabLayout() {
       tabBarIcon: ({ color }) => <Feather name="home" size={24} color={color} />
     }} />
 
-    <Tabs.Screen name="azkar" options={{
-      title: 'Azkar',
+    <Tabs.Screen name="awrad" options={{
+      title: 'Awrad',
       tabBarIcon: ({ color }) => <Feather name="list" size={24} color={color} />
     }} />
   </Tabs>
