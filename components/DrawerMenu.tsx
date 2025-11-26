@@ -60,23 +60,6 @@ export default function DrawerMenuProvider({ items, children, drawerWidth = 280 
 
   // Animation setup
   const headerProgress = useSharedValue(0);
-  const extraItemsBase = [
-    { key: 'collection_morning', label: 'أذكار الصباح والمساء', route: '/collections/morning-evening', icon: 'book' },
-    { key: 'collection_salawat', label: 'مجموعة الصلوات', route: '/collections/salawat', icon: 'book' },
-    { key: 'github', label: 'المشروع على GitHub', route: undefined, icon: 'github', onPress: () => Linking.openURL('https://github.com/MuhammadSwa/aldurar-native') }
-  ];
-  const extraItems = React.useMemo(() => {
-    const arr = [...extraItemsBase];
-    if (!items.some(i => i.key === 'settings')) {
-      arr.push({ key: 'settings', label: 'الإعدادات', route: '/settings', icon: 'settings' });
-    }
-    return arr;
-  }, [items]);
-  const combinedItems = React.useMemo(() => [...items, ...extraItems], [items, extraItems]);
-  // No per-item refs needed: we'll use a shared progress and compute staggered values,
-  // which gives better performance with Reanimated.
-
-  // Note: extra items animation indices are computed using `items.length + offset`.
 
   React.useEffect(() => {
     if (isOpen) {
@@ -118,7 +101,7 @@ export default function DrawerMenuProvider({ items, children, drawerWidth = 280 
     const headerStyle = useAnimatedStyle(() => ({ opacity: headerProgress.value, transform: [{ translateY: interpolate(headerProgress.value, [0, 1], [6, 0]) }] }));
 
     return (
-      <SafeAreaView className="flex-1 px-3 bg-transparent" style={{ paddingTop: insets.top + 8 }}>
+      <SafeAreaView className="flex-1 px-3 bg-background dark:bg-background-dark" style={{ paddingTop: insets.top + 8 }}>
         <ScrollView contentContainerStyle={{ padding: 12 }}>
           <View className="mb-2">
             <Animated.View style={headerStyle}>

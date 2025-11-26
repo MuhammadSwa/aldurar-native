@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Title, Body } from '@/components/Typography';
 export default function HomeScreen() {
   return (

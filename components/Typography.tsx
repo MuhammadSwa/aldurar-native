@@ -32,7 +32,7 @@ export function Body({ className = '', children, ...props }: BaseTextProps) {
 
 export function Muted({ className = '', children, ...props }: BaseTextProps) {
   return (
-    <RNText className={`text-sm text-muted-foreground dark:text-muted-dark ${className}`} {...props}>
+    <RNText className={`text-sm text-muted-foreground dark:text-muted-dark-foreground ${className}`} {...props}>
       {children}
     </RNText>
   );
