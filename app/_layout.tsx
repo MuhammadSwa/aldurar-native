@@ -12,6 +12,8 @@ export {
 
 setupRTL();
 
+import { Toast } from '@/components/Toast';
+
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
   const scheme = colorScheme === 'dark' ? 'dark' : 'light';
@@ -34,6 +36,7 @@ export default function RootLayout() {
           options={{ headerShown: true, title: 'حول', headerStyle: { backgroundColor: headerBg }, headerTintColor: headerTint }}
         />
       </Stack>
+      <Toast />
     </DrawerMenuProvider>
   );
 }

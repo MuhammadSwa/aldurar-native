@@ -48,7 +48,7 @@ export const ZikrTile: React.FC<ZikrTileProps> = ({
             <IconFeather
               name="bookmark"
               size={22}
-              className={`${isBookmarked ? 'text-primary dark:text-primary-dark' : 'text-muted-foreground dark:text-muted-dark'}`}
+              className={`${isBookmarked ? 'text-primary dark:text-primary-dark' : 'text-accent dark:text-accent-dark'}`}
             />
           </IconButton>
 
@@ -66,9 +66,9 @@ export const ZikrTile: React.FC<ZikrTileProps> = ({
         {/* Navigation Indicator */}
         <IconButton className="opacity-80">
           <IconMaterial
-            name="chevron-right"
+            name="chevron-left"
             size={28}
-            className="text-muted-foreground dark:text-muted-dark"
+            className="text-accent dark:text-accent-dark"
           />
         </IconButton>
       </Card>

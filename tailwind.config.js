@@ -46,9 +46,9 @@ module.exports = {
           'dark-foreground': 'hsl(120, 6%, 63%)',
         },
         accent: {
-          DEFAULT: 'hsl(161, 31%, 66%)',
+          DEFAULT: 'hsla(161, 99%, 34%, 1.00)',
           foreground: 'hsl(141, 61%, 11%)',
-          dark: 'hsl(166, 40%, 64%)',
+          dark: 'hsla(167, 72%, 11%, 1.00)',
           'dark-foreground': 'hsl(164, 41%, 5%)',
         },
         card: {
