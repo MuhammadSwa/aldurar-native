@@ -8,66 +8,65 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        border: {
+          light: 'hsl(46, 21%, 88%)',
+          dark: 'hsl(144, 24%, 8%)',
+        },
+        input: {
+          light: 'hsl(46, 21%, 88%)',
+          dark: 'hsl(144, 24%, 8%)',
+        },
+        ring: {
+          light: 'hsl(135, 54%, 40%)',
+          dark: 'hsl(133, 60%, 44%)',
+        },
+        background: {
+          light: 'hsl(45, 29%, 95%)',
+          dark: 'hsl(164, 41%, 5%)',
+        },
+        foreground: {
+          light: 'hsl(141, 61%, 11%)',
+          dark: 'hsl(240, 4%, 93%)',
+        },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'hsl(135, 54%, 40%)',
+          foreground: 'hsl(0, 0%, 100%)',
+          dark: 'hsl(133, 60%, 44%)',
+          'dark-foreground': 'hsl(164, 41%, 5%)',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: 'hsl(42, 56%, 54%)',
+          foreground: 'hsl(141, 61%, 11%)',
+          'dark-foreground': 'hsl(240, 4%, 93%)',
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          DEFAULT: 'hsl(45, 20%, 90%)',
+          foreground: 'hsl(120, 7%, 35%)',
+          dark: 'hsl(144, 30%, 15%)',
+          'dark-foreground': 'hsl(120, 6%, 63%)',
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          DEFAULT: 'hsl(161, 31%, 66%)',
+          foreground: 'hsl(141, 61%, 11%)',
+          dark: 'hsl(166, 40%, 64%)',
+          'dark-foreground': 'hsl(164, 41%, 5%)',
         },
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: 'hsl(0, 0%, 100%)',
+          foreground: 'hsl(141, 61%, 11%)',
+          dark: 'hsl(144, 42%, 9%)',
+          'dark-foreground': 'hsl(240, 4%, 93%)',
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        lg: '16px',
+        md: '12px',
+        sm: '8px',
       },
       borderWidth: {
         hairline: hairlineWidth(),
       },
-      keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-      },
     },
   },
-  future: {
-    hoverOnlyWhenSupported: true,
-  },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [],
 };

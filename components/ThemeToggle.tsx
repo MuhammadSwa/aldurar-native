@@ -1,24 +1,17 @@
-import { Button } from '@/components/ui/button';
+import { Text, Pressable } from 'react-native';
 import { useColorScheme } from 'nativewind';
-import { Icon } from '@/components/ui/icon';
-import { MoonStarIcon, SunIcon } from 'lucide-react-native';
 
-export default function ThemeToggle() {
+export function ThemeToggle() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
 
-  const THEME_ICONS = {
-    light: SunIcon,
-    dark: MoonStarIcon,
-  };
-
-
   return (
-    <Button
-      onPressIn={toggleColorScheme}
-      size="icon"
-      variant="ghost"
-      className="ios:size-9 rounded-full web:mx-4">
-      <Icon as={THEME_ICONS[colorScheme ?? 'light']} className="size-5" />
-    </Button>
+    <Pressable
+      onPress={toggleColorScheme}
+      className="bg-primary px-4 py-2 rounded-md"
+    >
+      <Text className="text-primary-foreground">
+        Current: {colorScheme}
+      </Text>
+    </Pressable>
   );
 }
