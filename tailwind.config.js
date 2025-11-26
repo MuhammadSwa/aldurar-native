@@ -9,23 +9,23 @@ module.exports = {
     extend: {
       colors: {
         border: {
-          light: 'hsl(46, 21%, 88%)',
+          DEFAULT: 'hsl(46, 21%, 88%)',
           dark: 'hsl(144, 24%, 8%)',
         },
         input: {
-          light: 'hsl(46, 21%, 88%)',
+          DEFAULT: 'hsl(46, 21%, 88%)',
           dark: 'hsl(144, 24%, 8%)',
         },
         ring: {
-          light: 'hsl(135, 54%, 40%)',
+          DEFAULT: 'hsl(135, 54%, 40%)',
           dark: 'hsl(133, 60%, 44%)',
         },
         background: {
-          light: 'hsl(45, 29%, 95%)',
+          DEFAULT: 'hsl(45, 29%, 95%)',
           dark: 'hsl(164, 41%, 5%)',
         },
         foreground: {
-          light: 'hsl(141, 61%, 11%)',
+          DEFAULT: 'hsl(141, 61%, 11%)',
           dark: 'hsl(240, 4%, 93%)',
         },
         primary: {

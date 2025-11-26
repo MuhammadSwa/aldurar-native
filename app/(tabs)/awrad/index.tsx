@@ -6,7 +6,7 @@ import salawatYousria from "azkar/collections/salawatYousriaCollection.json";
 
 export default function Screen() {
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-background dark:bg-background-dark">
       <FlatList
         data={salawatYousria}
         // Use a unique ID if your JSON has one, otherwise fallback to index

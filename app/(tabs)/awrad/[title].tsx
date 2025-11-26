@@ -1,7 +1,12 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Linking } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Ensure you have @expo/vector-icons installed
+import PrimaryButton from '@/components/PrimaryButton';
+import Card from '@/components/Card';
+import { Title, Heading, Body, Muted } from '@/components/Typography';
+import SectionHeader from '@/components/SectionHeader';
+import EmptyState from '@/components/EmptyState';
+import { IconIon } from '@/components/Icons';
 
 // Import your JSON data here
 import salawatYousria from "azkar/collections/salawatYousriaCollection.json";
@@ -17,14 +22,14 @@ export default function ZikrDetailScreen() {
 
   if (!item) {
     return (
-      <View className="flex-1 items-center justify-center bg-slate-50">
-        <Text className="text-lg text-slate-500">Azkar not found</Text>
+      <View className="flex-1 bg-background dark:bg-background-dark">
+        <EmptyState message="Azkar not found" />
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-slate-50">
+    <View className="flex-1 bg-background dark:bg-background-dark">
       {/* Set the Header Title Dynamically */}
       <Stack.Screen options={{ headerTitle: item.title, headerBackTitle: "Back" }} />
 
@@ -33,23 +38,15 @@ export default function ZikrDetailScreen() {
         contentContainerClassName="p-6 pb-20"
         showsVerticalScrollIndicator={false}
       >
-        {/* Title Section */}
-        <View className="mb-6 border-b border-slate-200 pb-4">
-          <Text className="text-2xl font-bold text-emerald-800 text-center leading-9">
-            {item.title}
-          </Text>
-
-          {/* Optional Audio Button if URL exists */}
-          {item.url && (
-            <TouchableOpacity
-              onPress={() => Linking.openURL(item.url)}
-              className="mt-4 flex-row items-center justify-center bg-emerald-100 p-3 rounded-xl self-center"
-            >
-              <Ionicons name="play-circle" size={24} color="#065f46" />
-              <Text className="ml-2 text-emerald-800 font-semibold">Listen to Audio</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+        <SectionHeader title={item.title} right={item.url ? (
+          <PrimaryButton
+            onPress={() => Linking.openURL(item.url)}
+            className="flex-row items-center justify-center rounded-xl px-4 py-3"
+          >
+              <IconIon name="play-circle" size={24} className="text-white" />
+            <Text className="ml-2 text-primary-foreground font-semibold">Listen to Audio</Text>
+          </PrimaryButton>
+        ) : null} />
 
         {/* Content Body */}
         <View className="mb-8">
@@ -58,10 +55,10 @@ export default function ZikrDetailScreen() {
 
         {/* Footer / References */}
         {item.footer && (
-          <View className="pt-1 border-t border-slate-300">
-            <Text className="text-xs text-slate-400 mt-2 leading-5">
+          <View className="pt-1 border-t border-border dark:border-border-dark">
+            <Muted className="mt-2 leading-5 text-xs">
               {item.footer}
-            </Text>
+            </Muted>
           </View>
         )}
       </ScrollView>
@@ -86,9 +83,9 @@ function renderFormattedContent(content: string) {
     // Check for Markdown Header 2 (##)
     if (trimmed.startsWith('##')) {
       return (
-        <Text key={index} className="text-xl font-bold text-emerald-700 mt-6 mb-3">
+        <Heading key={index} className="mt-6 mb-3 text-primary dark:text-primary-dark">
           {trimmed.replace(/^##\s*/, '')}
-        </Text>
+        </Heading>
       );
     }
 
@@ -96,13 +93,13 @@ function renderFormattedContent(content: string) {
     const isList = /^\d+\./.test(trimmed) || trimmed.startsWith('•');
 
     return (
-      <Text
+      <Body
         key={index}
-        className={`text-lg text-slate-800 leading-[3rem] ${isList ? 'font-bold my-2 text-emerald-900' : 'font-normal'}`}
+        className={`leading-[3rem] text-lg ${isList ? 'font-bold my-2 text-primary dark:text-primary-dark' : 'font-normal'}`}
         style={{ fontFamily: 'System' }} // Use a custom Arabic font here if you have one
       >
         {trimmed}
-      </Text>
+      </Body>
     );
   });
 }
