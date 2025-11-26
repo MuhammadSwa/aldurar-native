@@ -1,5 +1,5 @@
 // ThemeToggle moved to Settings screen
-import DrawerMenuProvider, { DrawerToggle } from '@/components/DrawerMenu';
+import { DrawerToggle } from '@/components/DrawerMenu';
 import { Stack } from "expo-router";
 import { View, I18nManager } from 'react-native';
 import { Title as HeaderTitle } from '@/components/Typography';
@@ -13,8 +13,7 @@ export default function HomeLayout() {
   const headerTint = themes.themes[scheme].colors.onSurface;
 
   return (
-    <DrawerMenuProvider items={[{ key: 'about', label: 'حول', route: '/about' }, { key: 'settings', label: 'الإعدادات', route: '/settings' }]}>
-      <Stack >
+    <Stack >
         <Stack.Screen name="index"
           options={{
             headerStyle: { backgroundColor: headerBg },
@@ -31,6 +30,5 @@ export default function HomeLayout() {
             }
           }} />
       </Stack>
-    </DrawerMenuProvider>
   );
 }

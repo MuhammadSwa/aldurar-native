@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import DrawerMenuProvider, { DrawerToggle } from '@/components/DrawerMenu';
+import { DrawerToggle } from '@/components/DrawerMenu';
 import { View, I18nManager } from 'react-native';
 import { Title as HeaderTitle } from '@/components/Typography';
 import { useColorScheme } from 'nativewind';
@@ -12,9 +12,7 @@ export default function AzkarLayout() {
   const headerTint = themes.themes[scheme].colors.onSurface;
 
   return (
-    <DrawerMenuProvider items={[{ key: 'about', label: 'حول', route: '/about' }, { key: 'settings', label: 'الإعدادات', route: '/settings' }]}
-    >
-      <Stack>
+    <Stack>
         <Stack.Screen name="index"
           options={{
             headerStyle: { backgroundColor: headerBg },
@@ -32,6 +30,5 @@ export default function AzkarLayout() {
           }}
         />
       </Stack>
-    </DrawerMenuProvider>
   );
 }

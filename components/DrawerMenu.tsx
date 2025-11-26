@@ -87,13 +87,13 @@ export default function DrawerMenuProvider({ items, children, drawerWidth = 280 
   }, [isOpen, headerProgress]);
 
   // Close the drawer when the route changes (ensures drawer doesn't persist when switching tabs)
-  const pathname = usePathname?.();
-  React.useEffect(() => {
-    if (isOpen) {
-      close();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  // const pathname = usePathname();
+  // React.useEffect(() => {
+  //   if (isOpen) {
+  //     close();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [pathname]);
 
   const onItemPress = (item: MenuItem) => {
     close();
