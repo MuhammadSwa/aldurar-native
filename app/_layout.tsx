@@ -5,6 +5,9 @@ import { Stack } from 'expo-router';
 import DrawerMenuProvider from '@/components/DrawerMenu';
 import { useColorScheme } from 'nativewind';
 import themes from '@/constants/design';
+import { useFonts, Amiri_400Regular, Amiri_700Bold } from '@expo-google-fonts/amiri';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
 
 export {
   ErrorBoundary,
@@ -14,11 +17,28 @@ setupRTL();
 
 import { Toast } from '@/components/Toast';
 
+SplashScreen.preventAutoHideAsync();
+
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
   const scheme = colorScheme === 'dark' ? 'dark' : 'light';
   const headerBg = themes.themes[scheme].colors.surface;
   const headerTint = themes.themes[scheme].colors.onSurface;
+
+  const [loaded, error] = useFonts({
+    Amiri_400Regular,
+    Amiri_700Bold,
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
 
   return (
     <DrawerMenuProvider items={[{ key: 'about', label: 'حول', route: '/about' }, { key: 'settings', label: 'الإعدادات', route: '/settings' }]}>

@@ -66,6 +66,10 @@ module.exports = {
       borderWidth: {
         hairline: hairlineWidth(),
       },
+      fontFamily: {
+        amiri: ['Amiri_400Regular'],
+        'amiri-bold': ['Amiri_700Bold'],
+      },
     },
   },
   plugins: [],

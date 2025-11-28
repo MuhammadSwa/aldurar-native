@@ -1,6 +1,6 @@
 import { View, Text, ScrollView } from 'react-native';
 import Card from '@/components/Card';
-import { Heading, Body, Muted } from '@/components/Typography';
+import { Muted } from '@/components/Typography';
 
 export default function AboutScreen() {
   return (

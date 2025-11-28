@@ -1,13 +1,13 @@
 // Type definitions for collections of azkar (Zikr)
 export type Zikr = {
-  title?: string;
+  title: string;
+  content: string;
   notes?: string;
-  url?: string;
   footer?: string;
-  content?: string;
+  url?: string;
 }
 
 export type ZikrCollection = {
-  title?: string;
-  collection?: Zikr[];
+  title: string;
+  collection: Zikr[];
 }

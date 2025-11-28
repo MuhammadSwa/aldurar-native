@@ -17,14 +17,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "ExpoLocalization_supportsRTL": true,
+        "ExpoLocalization_forcesRTL": true
+      },
+      "bundleIdentifier": "com.hdjdu.aldulrar"
     },
     "android": {
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hdjdu.aldulrar"
     },
     "web": {
       "bundler": "metro",
@@ -37,7 +43,8 @@
     },
     "plugins": [
       "expo-router",
-      "expo-localization"
+      "expo-localization",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true

@@ -7,7 +7,6 @@ const DrawerModule: any = require('react-native-drawer-layout');
 const Drawer: any = DrawerModule.Drawer ?? DrawerModule.default ?? DrawerModule;
 const DrawerPositions = Drawer?.positions ?? { Right: 'right', Left: 'left' };
 import { View, TouchableOpacity, Text, ScrollView, Image, I18nManager, Linking } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, interpolate } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
 import SectionHeader from './SectionHeader';
@@ -97,11 +96,10 @@ export default function DrawerMenuProvider({ items, children, drawerWidth = 280 
   }
   // Drawer content is a dedicated nested component so hooks can run at top level of it
   function DrawerContent() {
-    const insets = useSafeAreaInsets();
     const headerStyle = useAnimatedStyle(() => ({ opacity: headerProgress.value, transform: [{ translateY: interpolate(headerProgress.value, [0, 1], [6, 0]) }] }));
 
     return (
-      <SafeAreaView className="flex-1 px-3 bg-background dark:bg-background-dark" style={{ paddingTop: insets.top + 8 }}>
+      <View className="flex-1 px-3 bg-background dark:bg-background-dark" style={{ paddingTop: 8 }}>
         <ScrollView contentContainerStyle={{ padding: 12 }}>
           <View className="mb-2">
             <Animated.View style={headerStyle}>
@@ -173,7 +171,7 @@ export default function DrawerMenuProvider({ items, children, drawerWidth = 280 
             <ThemeToggle />
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     );
   }
 
