@@ -20,7 +20,10 @@
       "supportsTablet": true,
       "infoPlist": {
         "ExpoLocalization_supportsRTL": true,
-        "ExpoLocalization_forcesRTL": true
+        "ExpoLocalization_forcesRTL": true,
+        "UIBackgroundModes": [
+          "audio"
+        ]
       },
       "bundleIdentifier": "com.hdjdu.aldulrar"
     },

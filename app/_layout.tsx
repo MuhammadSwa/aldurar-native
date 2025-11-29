@@ -17,7 +17,7 @@ export {
 setupRTL();
 
 import { Toast } from '@/components/Toast';
-import { AudioPlayer } from '@/components/AudioPlayer';
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -59,7 +59,7 @@ export default function RootLayout() {
         />
       </Stack>
       <Toast />
-      <AudioPlayer />
+
     </DrawerMenuProvider>
   );
 }

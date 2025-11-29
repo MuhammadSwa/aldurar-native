@@ -4,6 +4,10 @@ import { useColorScheme as useNativewindColorScheme } from 'nativewind';
 import themes from '@/constants/design';
 
 
+import { View } from 'react-native';
+import { AudioPlayer } from '@/components/AudioPlayer';
+import { BottomTabBar } from '@react-navigation/bottom-tabs';
+
 export default function TabLayout() {
   const { colorScheme } = useNativewindColorScheme();
   const scheme = colorScheme === 'dark' ? 'dark' : 'light';
@@ -13,6 +17,12 @@ export default function TabLayout() {
   const border = themes.themes[scheme].colors.border;
 
   return <Tabs
+    tabBar={(props) => (
+      <View>
+        <AudioPlayer inline />
+        <BottomTabBar {...props} />
+      </View>
+    )}
     screenOptions={{
       // Hide the Tabs header and rely on per-tab Stack headers.
       headerShown: false,

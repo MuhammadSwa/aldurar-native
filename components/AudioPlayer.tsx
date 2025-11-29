@@ -9,12 +9,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import { IconIon } from '@/components/Icons';
 import { useAudioStore } from '@/lib/stores/audioStore';
-import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
+import { useAudioPlayer, useAudioPlayerStatus, setAudioModeAsync } from 'expo-audio';
 import Slider from '@react-native-community/slider';
 
 const PLAYBACK_SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2];
 
-export function AudioPlayer() {
+export function AudioPlayer({ inline = false }: { inline?: boolean }) {
   const player = useAudioPlayer();
   const status = useAudioPlayerStatus(player);
   const {
@@ -43,6 +43,23 @@ export function AudioPlayer() {
   useEffect(() => {
     setPlayer(player);
   }, [player, setPlayer]);
+
+  // Configure audio for background playback
+  useEffect(() => {
+    async function configureAudio() {
+      try {
+        await setAudioModeAsync({
+          playsInSilentMode: true,
+          shouldPlayInBackground: true,
+          interruptionModeAndroid: 'duckOthers',
+          interruptionMode: 'mixWithOthers'
+        });
+      } catch (error) {
+        console.error('Failed to set audio mode:', error);
+      }
+    }
+    configureAudio();
+  }, []);
 
   // Monitor player state
   useEffect(() => {
@@ -100,14 +117,14 @@ export function AudioPlayer() {
       entering={FadeInDown.duration(400)}
       exiting={FadeOutDown.duration(300)}
       layout={Layout.duration(300)}
-      className="absolute bottom-0 left-0 right-0 pb-6 px-3 z-50"
+      className={`${inline ? 'w-full px-3' : 'absolute bottom-0 left-0 right-0 pb-6 px-3 z-50'}`}
       style={{
         shadowColor: '#000',
         shadowOffset: { width: 0, height: -4 },
         shadowOpacity: 0.15,
         shadowRadius: 12,
         elevation: 10,
-        paddingBottom: 24, // Extra padding for Android nav bar
+        paddingBottom: inline ? 12 : 24, // Extra padding for Android nav bar only when not inline
       }}
     >
       <View className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
