@@ -19,12 +19,19 @@ export default function TabLayout() {
   return <Tabs
     tabBar={(props) => (
       <View>
-        <AudioPlayer inline />
+        {/* Audio Player Container */}
+        <View
+          pointerEvents="box-none"
+          className="absolute bottom-full left-0 right-0"
+        >
+          <AudioPlayer inline />
+        </View>
+
+        {/* Actual Bottom Tab Bar */}
         <BottomTabBar {...props} />
       </View>
     )}
     screenOptions={{
-      // Hide the Tabs header and rely on per-tab Stack headers.
       headerShown: false,
       tabBarActiveTintColor: primary,
       tabBarInactiveTintColor: muted,
