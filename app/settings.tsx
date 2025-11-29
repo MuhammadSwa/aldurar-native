@@ -3,6 +3,8 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import Card from '@/components/Card';
 import { Muted } from '@/components/Typography';
 
+
+
 export default function SettingsScreen() {
   return (
     <ScrollView className="bg-background dark:bg-background-dark" contentContainerClassName="p-4">

@@ -5,8 +5,8 @@ import { View, FlatList } from 'react-native';
 import EmptyState from '@/components/EmptyState';
 import { getCollection } from '@/lib/collections';
 import { useBookmarkStore, generateBookmarkId } from '@/lib/stores/bookmarkStore';
-
 import { useToastStore } from '@/lib/stores/toastStore';
+import { useHeaderTheme } from '@/lib/hooks/useHeaderTheme';
 
 interface CollectionItemsViewProps {
     collectionName: string;
@@ -14,6 +14,9 @@ interface CollectionItemsViewProps {
 }
 
 export function CollectionItemsView({ collectionName, basePath }: CollectionItemsViewProps) {
+    // Theme colors
+    const { headerBg, headerTint } = useHeaderTheme();
+
     // Get the selected collection (memoized for performance)
     const selectedCollection = React.useMemo(
         () => getCollection(collectionName || ''),
@@ -49,7 +52,11 @@ export function CollectionItemsView({ collectionName, basePath }: CollectionItem
     if (!selectedCollection) {
         return (
             <View className="flex-1 bg-background dark:bg-background-dark">
-                <Stack.Screen options={{ headerTitle: 'Collection Not Found' }} />
+                <Stack.Screen options={{
+                    headerTitle: 'Collection Not Found',
+                    headerStyle: { backgroundColor: headerBg },
+                    headerTintColor: headerTint,
+                }} />
                 <EmptyState message="Collection not found" />
             </View>
         );
@@ -60,7 +67,9 @@ export function CollectionItemsView({ collectionName, basePath }: CollectionItem
             <Stack.Screen
                 options={{
                     headerTitle: selectedCollection.title || 'Collection',
-                    headerBackTitle: 'Back'
+                    headerBackTitle: 'Back',
+                    headerStyle: { backgroundColor: headerBg },
+                    headerTintColor: headerTint,
                 }}
             />
 

@@ -3,8 +3,7 @@ import '@/global.css';
 import { setupRTL } from "@/lib/rtl-setup";
 import { Stack } from 'expo-router';
 import DrawerMenuProvider from '@/components/DrawerMenu';
-import { useColorScheme } from 'nativewind';
-import themes from '@/constants/design';
+import { useHeaderTheme } from '@/lib/hooks/useHeaderTheme';
 import { useFonts, Amiri_400Regular, Amiri_700Bold } from '@expo-google-fonts/amiri';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
@@ -22,10 +21,7 @@ import { Toast } from '@/components/Toast';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const { colorScheme } = useColorScheme();
-  const scheme = colorScheme === 'dark' ? 'dark' : 'light';
-  const headerBg = themes.themes[scheme].colors.surface;
-  const headerTint = themes.themes[scheme].colors.onSurface;
+  const { headerBg, headerTint } = useHeaderTheme();
 
   const [loaded, error] = useFonts({
     Amiri_400Regular,

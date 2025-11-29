@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, Modal, Pressable } from 'react-native';
 import Animated, {
   FadeInDown,
   FadeOutDown,
@@ -11,8 +11,6 @@ import { IconIon } from '@/components/Icons';
 import { useAudioStore } from '@/lib/stores/audioStore';
 import { useAudioPlayer, useAudioPlayerStatus, setAudioModeAsync } from 'expo-audio';
 import Slider from '@react-native-community/slider';
-
-const PLAYBACK_SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2];
 
 export function AudioPlayer({ inline = false }: { inline?: boolean }) {
   const player = useAudioPlayer();
@@ -38,6 +36,8 @@ export function AudioPlayer({ inline = false }: { inline?: boolean }) {
   const [isExpanded, setIsExpanded] = React.useState(true);
   const [isSeeking, setIsSeeking] = React.useState(false);
   const [seekPosition, setSeekPosition] = React.useState(0);
+  const [showSpeedDialog, setShowSpeedDialog] = React.useState(false);
+  const [tempSpeed, setTempSpeed] = React.useState(playbackSpeed);
 
   // Initialize player in the store
   useEffect(() => {
@@ -103,10 +103,14 @@ export function AudioPlayer({ inline = false }: { inline?: boolean }) {
     seekTo(value / 1000); // Convert milliseconds to seconds
   };
 
-  const cyclePlaybackSpeed = () => {
-    const currentIndex = PLAYBACK_SPEEDS.indexOf(playbackSpeed);
-    const nextIndex = (currentIndex + 1) % PLAYBACK_SPEEDS.length;
-    setPlaybackSpeed(PLAYBACK_SPEEDS[nextIndex]);
+  const handleSpeedDialogOpen = () => {
+    setTempSpeed(playbackSpeed);
+    setShowSpeedDialog(true);
+  };
+
+  const handleSpeedChange = (value: number) => {
+    setTempSpeed(value);
+    setPlaybackSpeed(value);
   };
 
   const currentPosition = isSeeking ? seekPosition : position;
@@ -197,12 +201,12 @@ export function AudioPlayer({ inline = false }: { inline?: boolean }) {
           <View className="flex-row items-center justify-between px-2">
             {/* Playback Speed */}
             <TouchableOpacity
-              onPress={cyclePlaybackSpeed}
+              onPress={handleSpeedDialogOpen}
               hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
               className="px-4 py-3 bg-slate-100 dark:bg-slate-800 rounded-lg min-w-[60px] items-center"
             >
               <Text className="text-sm font-bold text-slate-700 dark:text-slate-300">
-                {playbackSpeed}x
+                {parseFloat(playbackSpeed.toFixed(2))}x
               </Text>
             </TouchableOpacity>
 
@@ -246,6 +250,59 @@ export function AudioPlayer({ inline = false }: { inline?: boolean }) {
             </TouchableOpacity>
           </View>
         </View>
+
+        {/* Speed Adjustment Dialog */}
+        <Modal
+          visible={showSpeedDialog}
+          transparent
+          animationType="fade"
+          onRequestClose={() => setShowSpeedDialog(false)}
+        >
+          <Pressable
+            className="flex-1 bg-black/50 justify-center items-center"
+            onPress={() => setShowSpeedDialog(false)}
+          >
+            <Pressable
+              className="bg-white dark:bg-slate-900 rounded-3xl p-6 mx-6 w-80 max-w-[90%]"
+              onPress={(e) => e.stopPropagation()}
+              style={{ direction: 'rtl' }}
+            >
+              <View className="items-center mb-6">
+                <Text className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">
+                  سرعة التشغيل
+                </Text>
+                <Text className="text-4xl font-bold text-emerald-600 dark:text-emerald-500">
+                  {tempSpeed.toFixed(2)}x
+                </Text>
+              </View>
+
+              <View className="mb-6">
+                <Slider
+                  style={{ width: '100%', height: 40 }}
+                  minimumValue={0.5}
+                  maximumValue={1.5}
+                  value={tempSpeed}
+                  step={0.05}
+                  onValueChange={handleSpeedChange}
+                  minimumTrackTintColor="#10b981"
+                  maximumTrackTintColor="#cbd5e1"
+                  thumbTintColor="#10b981"
+                />
+                <View className="flex-row justify-between px-1 mt-2" style={{ direction: 'ltr' }}>
+                  <Text className="text-sm text-slate-500 dark:text-slate-400">0.5x</Text>
+                  <Text className="text-sm text-slate-500 dark:text-slate-400">1.5x</Text>
+                </View>
+              </View>
+
+              <TouchableOpacity
+                onPress={() => setShowSpeedDialog(false)}
+                className="bg-emerald-600 dark:bg-emerald-700 py-4 rounded-xl items-center"
+              >
+                <Text className="text-white font-bold text-base">تم</Text>
+              </TouchableOpacity>
+            </Pressable>
+          </Pressable>
+        </Modal>
       </View>
     </Animated.View>
   );

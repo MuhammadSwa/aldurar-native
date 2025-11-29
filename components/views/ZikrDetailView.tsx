@@ -8,6 +8,7 @@ import { getZikrFromCollection } from '@/lib/collections';
 import { RichTextParser, parseZikrContent, ZikrItemRenderer, ParsedItem } from '@/components/parser';
 import Animated, { FadeInDown, FadeIn } from 'react-native-reanimated';
 import { useAudioStore } from '@/lib/stores/audioStore';
+import { useHeaderTheme } from '@/lib/hooks/useHeaderTheme';
 
 interface ZikrDetailViewProps {
   title: string;
@@ -15,6 +16,9 @@ interface ZikrDetailViewProps {
 }
 
 export function ZikrDetailView({ title, collectionName }: ZikrDetailViewProps) {
+  // Theme colors
+  const { headerBg, headerTint } = useHeaderTheme();
+
   // Get audio player actions
   const { loadAndPlayAudio } = useAudioStore();
 
@@ -176,7 +180,11 @@ export function ZikrDetailView({ title, collectionName }: ZikrDetailViewProps) {
   if (!item) {
     return (
       <View className="flex-1 bg-background dark:bg-background-dark">
-        <Stack.Screen options={{ headerTitle: 'ذكر غير موجود' }} />
+        <Stack.Screen options={{
+          headerTitle: 'ذكر غير موجود',
+          headerStyle: { backgroundColor: headerBg },
+          headerTintColor: headerTint,
+        }} />
         <EmptyState message="ذكر غير موجود" />
       </View>
     );
@@ -184,7 +192,12 @@ export function ZikrDetailView({ title, collectionName }: ZikrDetailViewProps) {
 
   return (
     <View className="flex-1 bg-slate-50 dark:bg-slate-950">
-      <Stack.Screen options={{ headerTitle: item.title || 'بدون عنوان', headerBackTitle: "رجوع" }} />
+      <Stack.Screen options={{
+        headerTitle: item.title || 'بدون عنوان',
+        headerBackTitle: "رجوع",
+        headerStyle: { backgroundColor: headerBg },
+        headerTintColor: headerTint,
+      }} />
 
       <FlatList
         data={parsedContent}

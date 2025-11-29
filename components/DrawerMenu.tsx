@@ -6,7 +6,7 @@ import React, { createContext, useContext, useMemo, useRef, useState } from 'rea
 const DrawerModule: any = require('react-native-drawer-layout');
 const Drawer: any = DrawerModule.Drawer ?? DrawerModule.default ?? DrawerModule;
 const DrawerPositions = Drawer?.positions ?? { Right: 'right', Left: 'left' };
-import { View, TouchableOpacity, Text, ScrollView, Image, I18nManager, Linking } from 'react-native';
+import { View, TouchableOpacity, Text, ScrollView, Image, Linking } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, interpolate } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
 import SectionHeader from './SectionHeader';
@@ -15,7 +15,7 @@ import IconButton from './IconButton';
 import Card from './Card';
 import { Body } from './Typography';
 import { IconFeather } from './Icons';
-import { useRouter, usePathname } from 'expo-router';
+import { useRouter } from 'expo-router';
 // Using Animated.View directly; static classes are applied via wrapper Views (nativewind)
 
 export type MenuItem = {
