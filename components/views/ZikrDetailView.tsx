@@ -1,12 +1,13 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { View, Text, Linking, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { Title } from '@/components/Typography';
 import EmptyState from '@/components/EmptyState';
 import { IconIon } from '@/components/Icons';
 import { getZikrFromCollection } from '@/lib/collections';
 import { RichTextParser, parseZikrContent, ZikrItemRenderer, ParsedItem } from '@/components/parser';
 import Animated, { FadeInDown, FadeIn } from 'react-native-reanimated';
+import { useAudioStore } from '@/lib/stores/audioStore';
 
 interface ZikrDetailViewProps {
   title: string;
@@ -14,6 +15,9 @@ interface ZikrDetailViewProps {
 }
 
 export function ZikrDetailView({ title, collectionName }: ZikrDetailViewProps) {
+  // Get audio player actions
+  const { loadAndPlayAudio } = useAudioStore();
+
   // Fetch the specific zikr item
   const item = React.useMemo(
     () => getZikrFromCollection(collectionName, title),
@@ -61,7 +65,7 @@ export function ZikrDetailView({ title, collectionName }: ZikrDetailViewProps) {
           {item.url && (
             <Animated.View entering={FadeInDown.delay(200).duration(600)}>
               <TouchableOpacity
-                onPress={() => Linking.openURL(item.url || '')}
+                onPress={() => loadAndPlayAudio(item.url || '', item.title || 'بدون عنوان')}
                 activeOpacity={0.8}
                 className="mx-auto"
               >

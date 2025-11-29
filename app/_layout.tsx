@@ -8,6 +8,7 @@ import themes from '@/constants/design';
 import { useFonts, Amiri_400Regular, Amiri_700Bold } from '@expo-google-fonts/amiri';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { Text, View } from 'react-native'
 
 export {
   ErrorBoundary,
@@ -16,6 +17,7 @@ export {
 setupRTL();
 
 import { Toast } from '@/components/Toast';
+import { AudioPlayer } from '@/components/AudioPlayer';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -57,6 +59,7 @@ export default function RootLayout() {
         />
       </Stack>
       <Toast />
+      <AudioPlayer />
     </DrawerMenuProvider>
   );
 }
